@@ -13,16 +13,17 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private KeyCode a; // Jump key
     [SerializeField] private KeyCode b; // Attack key
-    [SerializeField] private KeyCode x;
+    [SerializeField] private KeyCode x; // Hook key
     [SerializeField] private KeyCode y;
-
-    [Space]
 
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 2f;
+
+    [Header("Stun")]
+    [SerializeField] private float stunTime = 1f;
 
     private State currentState;
 
@@ -31,8 +32,11 @@ public class Movement : MonoBehaviour
     #region Public
     public void SetState(State state)
     {
-        currentState = state;
-        state.OnStart();
+        if (currentState?.GetType() != typeof(Stunned) && state?.GetType() != currentState?.GetType())
+        {
+            currentState = state;
+            state.OnStart();
+        }
     }
 
     public void XAxisMove(float magnitude)
@@ -54,6 +58,11 @@ public class Movement : MonoBehaviour
     {
         Rigidbody2d.velocity = new Vector2(direction.x * jumpForce, direction.y * jumpForce);
     }
+
+    public void StartRestoreAfterStun()
+    {
+        StartCoroutine(RestoreAfterStun());
+    }
     #endregion
 
     #region MonoBehaviour
@@ -64,48 +73,11 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        Rigidbody2d.velocity = new Vector2(0f, Rigidbody2d.velocity.y);
+        currentState?.OnUpdate();
 
         InputDetect();
 
         FallingWithGravity();
-    }
-
-    private void InputDetect()
-    {
-        if (Input.GetKey(up))
-        {
-            currentState.OnUpButton();
-        }
-        if (Input.GetKey(left))
-        {
-            currentState.OnLeftButton();
-        }
-        if (Input.GetKey(down))
-        {
-            currentState.OnDownButton();
-        }
-        if (Input.GetKey(right))
-        {
-            currentState.OnRightButton();
-        }
-
-        if (Input.GetKeyDown(a))
-        {
-            currentState.OnAButton();
-        }
-        if (Input.GetKeyDown(b))
-        {
-            currentState.OnBButton();
-        }
-        if (Input.GetKeyDown(x))
-        {
-            currentState.OnXButton();
-        }
-        if (Input.GetKeyDown(y))
-        {
-            currentState.OnYButton();
-        }
     }
     #endregion
 
@@ -124,5 +96,50 @@ public class Movement : MonoBehaviour
             }
         }
     }
+
+    private void InputDetect()
+    {
+        if (Input.GetKey(up))
+        {
+            currentState?.OnUpButton();
+        }
+        if (Input.GetKey(left))
+        {
+            currentState?.OnLeftButton();
+        }
+        if (Input.GetKey(down))
+        {
+            currentState?.OnDownButton();
+        }
+        if (Input.GetKey(right))
+        {
+            currentState?.OnRightButton();
+        }
+
+        if (Input.GetKeyDown(a))
+        {
+            currentState?.OnAButton();
+        }
+        if (Input.GetKeyDown(b))
+        {
+            currentState?.OnBButton();
+        }
+        if (Input.GetKeyDown(x))
+        {
+            currentState?.OnXButton();
+        }
+        if (Input.GetKeyDown(y))
+        {
+            currentState?.OnYButton();
+        }
+    }
     #endregion
+
+    private IEnumerator RestoreAfterStun()
+    {
+        yield return new WaitForSeconds(stunTime);
+        Debug.Log("setting state after stun");
+        currentState = new Jump(this);
+        currentState.OnStart();
+    }
 }

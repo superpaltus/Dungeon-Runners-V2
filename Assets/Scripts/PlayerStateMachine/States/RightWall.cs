@@ -28,7 +28,7 @@ public class RightWall : State
     {
         Vector2 jumpDirection = new Vector2(-1f, 1f);
         jumpDirection = jumpDirection.normalized;
-        movement.SetState(new Jump(movement));
+        movement.SetState(new Stunned(movement));
         movement.WallJump(jumpDirection);
     }
     public override void OnBButton()

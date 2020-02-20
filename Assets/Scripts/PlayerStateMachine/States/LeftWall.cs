@@ -29,7 +29,7 @@ public class LeftWall : State
     {
         Vector2 jumpDirection = new Vector2(1f, 1f);
         jumpDirection = jumpDirection.normalized;
-
+        movement.SetState(new Stunned(movement));
         movement.WallJump(jumpDirection);
     }
     public override void OnBButton()

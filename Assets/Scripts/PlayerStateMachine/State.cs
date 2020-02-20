@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public abstract class State
 {
@@ -10,6 +9,7 @@ public abstract class State
     }
 
     public virtual void OnStart() { }
+    public virtual void OnUpdate() { }
     public virtual void OnUpButton() { }
     public virtual void OnLeftButton() { }
     public virtual void OnDownButton() { }

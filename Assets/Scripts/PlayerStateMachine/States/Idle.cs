@@ -9,6 +9,11 @@ public class Idle : State
         Debug.Log("Im in Idle State");
     }
 
+    public override void OnUpdate()
+    {
+        movement.Rigidbody2d.velocity = new Vector2(0f, movement.Rigidbody2d.velocity.y);
+    }
+
     public override void OnLeftButton()
     {
         movement.XAxisMove(-1f);

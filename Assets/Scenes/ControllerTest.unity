@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 2136509915}
   - component: {fileID: 2136509916}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,6 +748,7 @@ MonoBehaviour:
   jumpForce: 5
   fallMultiplier: 5
   lowJumpMultiplier: 5
+  stunTime: 0.5
 --- !u!114 &2136509916
 MonoBehaviour:
   m_ObjectHideFlags: 0
