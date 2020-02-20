@@ -33,4 +33,9 @@ public class Idle : State
     {
         Debug.Log("Attacking");
     }
+
+    public override void OnYButton()
+    {
+        movement.SetState(new Dash(movement));
+    }
 }

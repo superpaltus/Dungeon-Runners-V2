@@ -36,4 +36,9 @@ public class Jump : State
     {
         Debug.Log("Attack in air");
     }
+
+    public override void OnYButton()
+    {
+        movement.SetState(new Dash(movement));
+    }
 }

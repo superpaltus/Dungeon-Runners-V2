@@ -749,6 +749,8 @@ MonoBehaviour:
   fallMultiplier: 5
   lowJumpMultiplier: 5
   stunTime: 0.5
+  dashTime: 0.1
+  dashForce: 20
 --- !u!114 &2136509916
 MonoBehaviour:
   m_ObjectHideFlags: 0

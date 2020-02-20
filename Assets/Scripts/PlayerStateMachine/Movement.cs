@@ -14,7 +14,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private KeyCode a; // Jump key
     [SerializeField] private KeyCode b; // Attack key
     [SerializeField] private KeyCode x; // Hook key
-    [SerializeField] private KeyCode y;
+    [SerializeField] private KeyCode y; // Dash key
+
+    private Vector2 inputDirection;
 
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
@@ -24,6 +26,10 @@ public class Movement : MonoBehaviour
 
     [Header("Stun")]
     [SerializeField] private float stunTime = 1f;
+
+    [Header("Dash")]
+    [SerializeField] private float dashTime = 0.3f;
+    [SerializeField] private float dashForce = 8f;
 
     private State currentState;
 
@@ -63,6 +69,11 @@ public class Movement : MonoBehaviour
     {
         StartCoroutine(RestoreAfterStun());
     }
+
+    public void StartDash()
+    {
+        StartCoroutine(Dash());
+    }
     #endregion
 
     #region MonoBehaviour
@@ -99,22 +110,30 @@ public class Movement : MonoBehaviour
 
     private void InputDetect()
     {
+        Vector2 thisFrameInputDirection = Vector2.zero;
+
         if (Input.GetKey(up))
         {
             currentState?.OnUpButton();
+            thisFrameInputDirection += Vector2.up;
         }
         if (Input.GetKey(left))
         {
             currentState?.OnLeftButton();
+            thisFrameInputDirection += Vector2.left;
         }
         if (Input.GetKey(down))
         {
             currentState?.OnDownButton();
+            thisFrameInputDirection += Vector2.down;
         }
         if (Input.GetKey(right))
         {
             currentState?.OnRightButton();
+            thisFrameInputDirection += Vector2.right;
         }
+
+        inputDirection = thisFrameInputDirection.normalized;
 
         if (Input.GetKeyDown(a))
         {
@@ -139,6 +158,15 @@ public class Movement : MonoBehaviour
     {
         yield return new WaitForSeconds(stunTime);
         Debug.Log("setting state after stun");
+        currentState = new Jump(this);
+        currentState.OnStart();
+    }
+
+    private IEnumerator Dash()
+    {
+        Rigidbody2d.velocity = inputDirection;
+        Rigidbody2d.velocity *= dashForce;
+        yield return new WaitForSeconds(dashTime);
         currentState = new Jump(this);
         currentState.OnStart();
     }
