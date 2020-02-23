@@ -220,7 +220,7 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Rigidbody2d.velocity = inputDirection;
+        Rigidbody2d.velocity = new Vector2(inputDirection.x, 0f).normalized;
         Rigidbody2d.velocity *= dashForce;
         yield return new WaitForSeconds(dashTime);
         ForceSetState(new Jump(this));
