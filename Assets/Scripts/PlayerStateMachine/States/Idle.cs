@@ -39,6 +39,11 @@ public class Idle : State
         movement.ThrowHook();
     }
 
+    public override void OnXButtonUp()
+    {
+        movement.RetriveHook();
+    }
+
     public override void OnYButton()
     {
         movement.SetState(new Dash(movement));

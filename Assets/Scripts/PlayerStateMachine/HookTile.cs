@@ -13,6 +13,8 @@ public class HookTile : MonoBehaviour
 
     private Movement movement;
 
+    private bool isRetriving;
+
     public Vector2 MoveDirection
     {
         get
@@ -32,6 +34,11 @@ public class HookTile : MonoBehaviour
         }
     }
 
+    public void RetriveHook()
+    {
+        currentLifeTime = 0f;
+    }
+
     private void Start()
     {
         movement = GetComponentInParent<Movement>();
@@ -39,20 +46,23 @@ public class HookTile : MonoBehaviour
 
     private void OnEnable()
     {
+        isRetriving = false;
         currentLifeTime = lifeTime;
         transform.position = transform.parent.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         transform.localPosition += moveDirection * Time.deltaTime * speed;
         currentLifeTime -= Time.deltaTime;
-        if (currentLifeTime <= 0f)
+
+        if (!isRetriving && currentLifeTime <= 0f)
         {
+            isRetriving = true;
             moveDirection = -moveDirection;
-            currentLifeTime = 2 * lifeTime;
         }
-        if (transform.localPosition.y <= 0f)
+
+        if (transform.localPosition.y <= 0.3f)
         {
             gameObject.SetActive(false);
         }

@@ -1,4 +1,6 @@
-﻿public abstract class State
+﻿using System;
+
+public abstract class State
 {
     protected readonly Movement movement;
     public State(Movement movement)
@@ -15,5 +17,6 @@
     public virtual void OnAButton() { }
     public virtual void OnBButton() { }
     public virtual void OnXButton() { }
+    public virtual void OnXButtonUp() { }
     public virtual void OnYButton() { }
 }

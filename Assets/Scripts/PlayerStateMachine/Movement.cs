@@ -98,6 +98,14 @@ public class Movement : MonoBehaviour
             hookTile.MoveDirection = inputDirection;
         }
     }
+
+    public void RetriveHook()
+    {
+        if (hookTile.isActiveAndEnabled)
+        {
+            hookTile.RetriveHook();
+        }
+    }
     #endregion
 
     #region MonoBehaviour
@@ -174,6 +182,10 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(x))
         {
             currentState?.OnXButton();
+        }
+        if (Input.GetKeyUp(x))
+        {
+            currentState?.OnXButtonUp();
         }
         if (Input.GetKeyDown(y))
         {
