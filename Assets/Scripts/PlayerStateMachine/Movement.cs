@@ -40,6 +40,7 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D Rigidbody2d { get; private set; }
     public SpringJoint2D SpringJoint2d { get; private set; }
+    public bool CanDash { get; set; } = true;
 
     #region Public
     public void SetState(State state)
@@ -220,7 +221,15 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Rigidbody2d.velocity = new Vector2(inputDirection.x, 0f).normalized;
+        if (faceDirection == Vector3.forward)
+        {
+            Rigidbody2d.velocity = new Vector2(-1f, 0f);
+        }
+        else if (faceDirection == Vector3.back)
+        {
+            Rigidbody2d.velocity = new Vector2(1f, 0f);
+        }
+
         Rigidbody2d.velocity *= dashForce;
         yield return new WaitForSeconds(dashTime);
         ForceSetState(new Jump(this));

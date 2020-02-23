@@ -50,6 +50,10 @@ public class Jump : State
 
     public override void OnYButton()
     {
-        movement.SetState(new Dash(movement));
+        if (movement.CanDash)
+        {
+            movement.CanDash = false;
+            movement.SetState(new Dash(movement));
+        }
     }
 }
