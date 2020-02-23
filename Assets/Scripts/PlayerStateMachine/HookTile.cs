@@ -72,6 +72,8 @@ public class HookTile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isRetriving) return;
+
         var hookAnchor = collision.GetComponent<HookAnchor>();
 
         if (hookAnchor != null)
