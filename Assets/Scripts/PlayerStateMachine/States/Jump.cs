@@ -28,13 +28,18 @@ public class Jump : State
         {
             Debug.Log("Extra jump");
             canExtraJump = false;
-            movement.Jump(1f);
+            movement.Jump();
         }
     }
 
     public override void OnBButton()
     {
         Debug.Log("Attack in air");
+    }
+
+    public override void OnXButton()
+    {
+        movement.ThrowHook();
     }
 
     public override void OnYButton()

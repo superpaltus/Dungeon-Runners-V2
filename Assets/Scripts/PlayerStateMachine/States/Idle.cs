@@ -26,12 +26,17 @@ public class Idle : State
 
     public override void OnAButton()
     {
-        movement.Jump(1f);
+        movement.Jump();
     }
 
     public override void OnBButton()
     {
         Debug.Log("Attacking");
+    }
+
+    public override void OnXButton()
+    {
+        movement.ThrowHook();
     }
 
     public override void OnYButton()

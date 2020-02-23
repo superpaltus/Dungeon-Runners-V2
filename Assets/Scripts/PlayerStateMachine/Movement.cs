@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,17 +33,31 @@ public class Movement : MonoBehaviour
     [SerializeField] private float dashForce = 8f;
 
     private State currentState;
+    private HookTile hookTile;
 
     public Rigidbody2D Rigidbody2d { get; private set; }
+    public SpringJoint2D SpringJoint2d { get; private set; }
 
     #region Public
     public void SetState(State state)
     {
-        if (currentState?.GetType() != typeof(Stunned) && state?.GetType() != currentState?.GetType())
+        var settingType = state?.GetType();
+        var currentType = currentState?.GetType();
+
+        if (currentType == typeof(Stunned)) return;
+        if (currentType == typeof(Hook)) return;
+
+        if (settingType != currentType)
         {
             currentState = state;
             state.OnStart();
         }
+    }
+
+    public void ForceSetState(State state)
+    {
+        currentState = state;
+        state.OnStart();
     }
 
     public void XAxisMove(float magnitude)
@@ -55,9 +70,9 @@ public class Movement : MonoBehaviour
         Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, speed * magnitude);
     }
 
-    public void Jump(float magnitude)
+    public void Jump()
     {
-        Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, magnitude * jumpForce);
+        Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, jumpForce);
     }
 
     public void WallJump(Vector2 direction)
@@ -74,12 +89,25 @@ public class Movement : MonoBehaviour
     {
         StartCoroutine(Dash());
     }
+
+    public void ThrowHook()
+    {
+        if (!hookTile.isActiveAndEnabled)
+        {
+            hookTile.gameObject.SetActive(true);
+            hookTile.MoveDirection = inputDirection;
+        }
+    }
     #endregion
 
     #region MonoBehaviour
     void Start()
     {
         Rigidbody2d = GetComponent<Rigidbody2D>();
+        SpringJoint2d = GetComponent<SpringJoint2D>();
+
+        hookTile = GetComponentInChildren<HookTile>();
+        hookTile.gameObject.SetActive(false);
     }
 
     void Update()
@@ -158,8 +186,7 @@ public class Movement : MonoBehaviour
     {
         yield return new WaitForSeconds(stunTime);
         Debug.Log("setting state after stun");
-        currentState = new Jump(this);
-        currentState.OnStart();
+        ForceSetState(new Jump(this));
     }
 
     private IEnumerator Dash()
@@ -167,7 +194,6 @@ public class Movement : MonoBehaviour
         Rigidbody2d.velocity = inputDirection;
         Rigidbody2d.velocity *= dashForce;
         yield return new WaitForSeconds(dashTime);
-        currentState = new Jump(this);
-        currentState.OnStart();
+        ForceSetState(new Jump(this));
     }
 }

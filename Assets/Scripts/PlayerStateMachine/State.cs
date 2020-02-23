@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class State
+﻿public abstract class State
 {
     protected readonly Movement movement;
     public State(Movement movement)
