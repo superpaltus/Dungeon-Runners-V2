@@ -62,7 +62,9 @@ public class HookTile : MonoBehaviour
             moveDirection = -moveDirection;
         }
 
-        if (transform.localPosition.y <= 0.3f)
+        if ( isRetriving 
+            && Mathf.Abs(transform.localPosition.x - moveDirection.x) <= 1f
+            && Mathf.Abs(transform.localPosition.y - moveDirection.y) <= 1f)
         {
             gameObject.SetActive(false);
         }
