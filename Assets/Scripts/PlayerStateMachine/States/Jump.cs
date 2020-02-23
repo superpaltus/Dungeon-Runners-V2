@@ -35,6 +35,7 @@ public class Jump : State
     public override void OnBButton()
     {
         Debug.Log("Attack in air");
+        movement.Attack();
     }
 
     public override void OnXButton()

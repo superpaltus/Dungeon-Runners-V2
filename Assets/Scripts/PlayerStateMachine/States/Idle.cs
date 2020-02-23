@@ -32,6 +32,7 @@ public class Idle : State
     public override void OnBButton()
     {
         Debug.Log("Attacking");
+        movement.Attack();
     }
 
     public override void OnXButton()

@@ -35,6 +35,9 @@ public class Movement : MonoBehaviour
     private State currentState;
     private HookTile hookTile;
 
+    private WeaponAnchorRotator weaponAnchorRotator;
+    private Vector3 faceDirection = Vector3.forward;
+
     public Rigidbody2D Rigidbody2d { get; private set; }
     public SpringJoint2D SpringJoint2d { get; private set; }
 
@@ -106,6 +109,15 @@ public class Movement : MonoBehaviour
             hookTile.RetriveHook();
         }
     }
+
+    public void Attack()
+    {
+        if (!weaponAnchorRotator.isActiveAndEnabled)
+        {
+            weaponAnchorRotator.gameObject.SetActive(true);
+            weaponAnchorRotator.SetRotation(faceDirection);
+        }
+    }
     #endregion
 
     #region MonoBehaviour
@@ -116,6 +128,9 @@ public class Movement : MonoBehaviour
 
         hookTile = GetComponentInChildren<HookTile>();
         hookTile.gameObject.SetActive(false);
+
+        weaponAnchorRotator = GetComponentInChildren<WeaponAnchorRotator>();
+        weaponAnchorRotator.gameObject.SetActive(false);
     }
 
     void Update()
@@ -157,6 +172,7 @@ public class Movement : MonoBehaviour
         {
             currentState?.OnLeftButton();
             thisFrameInputDirection += Vector2.left;
+            faceDirection = Vector3.forward;
         }
         if (Input.GetKey(down))
         {
@@ -167,6 +183,7 @@ public class Movement : MonoBehaviour
         {
             currentState?.OnRightButton();
             thisFrameInputDirection += Vector2.right;
+            faceDirection = Vector3.back;
         }
 
         inputDirection = thisFrameInputDirection.normalized;
