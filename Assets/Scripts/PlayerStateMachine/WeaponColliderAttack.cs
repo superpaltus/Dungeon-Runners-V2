@@ -17,6 +17,13 @@ public class WeaponColliderAttack : MonoBehaviour
             playerMovement.Rigidbody2d.AddForce(attackImpulseDirection * attackPower);
             transform.parent.gameObject.SetActive(false);
         }
+        // говнокод !!!!!!
+        var BlockDmg = collision.gameObject.GetComponent<DestBlock>();
+        if (BlockDmg != null)
+        {
+            BlockDmg.TakeDmg(attackPower);
+        }
 
+        // говнокод !!!!!!
     }
 }
