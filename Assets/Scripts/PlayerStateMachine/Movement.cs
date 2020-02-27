@@ -53,6 +53,7 @@ public class Movement : MonoBehaviour
 
         if (settingType != currentType)
         {
+            currentState?.OnEnd();
             currentState = state;
             state.OnStart();
         }
@@ -210,7 +211,6 @@ public class Movement : MonoBehaviour
             currentState?.OnYButton();
         }
     }
-    #endregion
 
     private IEnumerator RestoreAfterStun()
     {
@@ -234,4 +234,5 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         ForceSetState(new Jump(this));
     }
+    #endregion
 }
