@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class UIParameter<T> : MonoBehaviour
+public abstract class UIParameter : MonoBehaviour 
 {
-    public abstract void ChangeValue(T value);
+    public abstract void OnStart(GameObject player);
 }
