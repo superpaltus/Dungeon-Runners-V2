@@ -12,7 +12,7 @@ public class RightWall : State
     {
         Debug.Log("Im on Right wall");
         standardGravityScale = movement.Rigidbody2d.gravityScale;
-        movement.Rigidbody2d.velocity = Vector2.zero;
+        //movement.Rigidbody2d.velocity = Vector2.zero;
         movement.Rigidbody2d.drag = startLinearDrag;
         isHooked = false;
     }
@@ -20,9 +20,15 @@ public class RightWall : State
     public override void OnUpdate()
     {
         float drag = movement.Rigidbody2d.drag;
+        
         if (!isHooked && drag > 0f)
         {
             Mathf.Clamp(movement.Rigidbody2d.drag -= Time.deltaTime, 0f, startLinearDrag);
+        }
+
+        if (isHooked)
+        {
+            movement.Stamina.Spend(Time.deltaTime);
         }
     }
 
@@ -61,9 +67,12 @@ public class RightWall : State
 
     public override void OnXButton()
     {
-        isHooked = true;
-        movement.Rigidbody2d.gravityScale = 0f;
-        movement.Rigidbody2d.drag = startLinearDrag;
+        if (movement.Stamina.Spend(Time.deltaTime))
+        {
+            isHooked = true;
+            movement.Rigidbody2d.gravityScale = 0f;
+            movement.Rigidbody2d.drag = startLinearDrag;
+        }
     }
 
     public override void OnXButtonUp()

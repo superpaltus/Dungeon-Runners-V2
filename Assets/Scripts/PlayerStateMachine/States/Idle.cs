@@ -7,6 +7,7 @@ public class Idle : State
     public override void OnStart()
     {
         movement.CanDash = true;
+        movement.Stamina.Regain();
         Debug.Log("Im in Idle State");
     }
 

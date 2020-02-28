@@ -14,8 +14,8 @@ public class Stamina : MonoBehaviour
     public bool Spend(float value)
     {
         var valueAfterSpending = Mathf.Clamp(currentValue - value, 0f, 100f);
-
-        if (valueAfterSpending >= 0f)
+        print($"stamina is {valueAfterSpending}");
+        if (valueAfterSpending > 0f)
         {
             currentValue = valueAfterSpending;
             StaminaChanged?.Invoke(currentValue);
@@ -31,5 +31,6 @@ public class Stamina : MonoBehaviour
     public void Regain()
     {
         currentValue = 100f;
+        StaminaChanged?.Invoke(currentValue);
     }
 }
