@@ -6,6 +6,8 @@ public class Idle : State
 
     public override void OnStart()
     {
+        movement.CanDash = true;
+        movement.Stamina.Regain();
         Debug.Log("Im in Idle State");
     }
 
@@ -47,6 +49,10 @@ public class Idle : State
 
     public override void OnYButton()
     {
-        movement.SetState(new Dash(movement));
+        if (movement.CanDash)
+        {
+            movement.CanDash = false;
+            movement.SetState(new Dash(movement));
+        }
     }
 }

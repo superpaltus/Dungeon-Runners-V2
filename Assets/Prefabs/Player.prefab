@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1202735186450226807}
   - component: {fileID: 1202735186450226800}
   - component: {fileID: 1202735186450226801}
+  - component: {fileID: -4025903234444856608}
+  - component: {fileID: 381606034}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -151,6 +153,30 @@ SpringJoint2D:
   m_Distance: 0.005
   m_DampingRatio: 0.1
   m_Frequency: 1
+--- !u!114 &-4025903234444856608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202735186450226811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558fce17de4cc7b4692a58e4ea6207fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &381606034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202735186450226811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66015386ca448584e85bb6365fbc8a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202735187344190376
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 750
+  maxZAngleRight: 250
+  maxZAngleLeft: 110
 --- !u!1 &8221858228842212735
 GameObject:
   m_ObjectHideFlags: 0

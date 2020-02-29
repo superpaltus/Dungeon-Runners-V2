@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Stamina))]
+[RequireComponent(typeof(PlyerGoldCollector))]
 public class Movement : MonoBehaviour
 {
     [Header("Keys")]
@@ -32,6 +34,10 @@ public class Movement : MonoBehaviour
     [SerializeField] private float dashTime = 0.3f;
     [SerializeField] private float dashForce = 8f;
 
+    [Header("Stamina")]
+    [SerializeField] private float staminaDrianSpeed = 5f;
+    [SerializeField] private float staminaForJump = 15f;
+
     private State currentState;
     private HookTile hookTile;
 
@@ -40,6 +46,8 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D Rigidbody2d { get; private set; }
     public SpringJoint2D SpringJoint2d { get; private set; }
+    public Stamina Stamina { get; private set; }
+    public bool CanDash { get; set; } = true;
 
     #region Public
     public void SetState(State state)
@@ -52,6 +60,7 @@ public class Movement : MonoBehaviour
 
         if (settingType != currentType)
         {
+            currentState?.OnEnd();
             currentState = state;
             state.OnStart();
         }
@@ -59,6 +68,7 @@ public class Movement : MonoBehaviour
 
     public void ForceSetState(State state)
     {
+        currentState.OnEnd();
         currentState = state;
         state.OnStart();
     }
@@ -71,21 +81,28 @@ public class Movement : MonoBehaviour
     public void YAxisMove(float magnitude)
     {
         Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, speed * magnitude);
+        Stamina.Spend(Time.deltaTime * staminaDrianSpeed);
     }
 
     public void Jump()
     {
-        Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, jumpForce);
+        if (Stamina.Spend(staminaForJump))
+        {
+            Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, jumpForce);
+        }
     }
 
     public void WallJump(Vector2 direction)
     {
-        Rigidbody2d.velocity = new Vector2(direction.x * jumpForce, direction.y * jumpForce);
+        if (direction.y == 0 || Stamina.Spend(staminaForJump))
+        {
+            Rigidbody2d.velocity = new Vector2(direction.x * jumpForce, direction.y * jumpForce);
+        }
     }
 
-    public void StartRestoreAfterStun()
+    public void StartRestoreAfterStun(float stunTime)
     {
-        StartCoroutine(RestoreAfterStun());
+        StartCoroutine(RestoreAfterStun(stunTime));
     }
 
     public void StartDash()
@@ -131,8 +148,11 @@ public class Movement : MonoBehaviour
 
         weaponAnchorRotator = GetComponentInChildren<WeaponAnchorRotator>();
         weaponAnchorRotator.gameObject.SetActive(false);
-    }
 
+        Stamina = GetComponent<Stamina>();
+        Stamina.StaminaExpired += OnStaminaExpired;
+    }
+    
     void Update()
     {
         currentState?.OnUpdate();
@@ -209,9 +229,8 @@ public class Movement : MonoBehaviour
             currentState?.OnYButton();
         }
     }
-    #endregion
 
-    private IEnumerator RestoreAfterStun()
+    private IEnumerator RestoreAfterStun(float stunTime)
     {
         yield return new WaitForSeconds(stunTime);
         Debug.Log("setting state after stun");
@@ -220,9 +239,24 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        Rigidbody2d.velocity = inputDirection;
+        if (faceDirection == Vector3.forward)
+        {
+            Rigidbody2d.velocity = new Vector2(-1f, 0f);
+        }
+        else if (faceDirection == Vector3.back)
+        {
+            Rigidbody2d.velocity = new Vector2(1f, 0f);
+        }
+
         Rigidbody2d.velocity *= dashForce;
         yield return new WaitForSeconds(dashTime);
         ForceSetState(new Jump(this));
     }
+    
+    private void OnStaminaExpired()
+    {
+        ForceSetState(new Stunned(this, 3f));
+    }
+
+    #endregion
 }

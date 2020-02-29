@@ -19,4 +19,5 @@ public abstract class State
     public virtual void OnXButton() { }
     public virtual void OnXButtonUp() { }
     public virtual void OnYButton() { }
+    public virtual void OnEnd() { }
 }
