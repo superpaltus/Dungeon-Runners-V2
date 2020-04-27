@@ -114,6 +114,8 @@ MonoBehaviour:
   stunTime: 0.2
   dashTime: 0.1
   dashForce: 20
+  staminaDrianSpeed: 5
+  staminaForJump: 15
 --- !u!114 &1202735186450226800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +133,8 @@ MonoBehaviour:
     m_Bits: 256
   collisionRadius: 0.1
   bottomOffset: {x: 0, y: -0.5}
-  rightOffset: {x: 0.5, y: 0}
-  leftOffset: {x: -0.5, y: 0}
+  rightOffset: {x: 0.5, y: -0.3}
+  leftOffset: {x: -0.5, y: -0.3}
 --- !u!231 &1202735186450226801
 SpringJoint2D:
   m_ObjectHideFlags: 0
