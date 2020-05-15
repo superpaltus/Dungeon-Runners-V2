@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EndLevelTrigger : MonoBehaviour
 {
+    public static Vector3 endLevelPosition;
+
+    private void Start()
+    {
+        endLevelPosition = transform.position;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.GetComponent<Movement>())

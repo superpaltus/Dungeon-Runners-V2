@@ -8,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlyerGoldCollector))]
 public class Movement : MonoBehaviour
 {
+    public Action<float> DistanceChanged;
+
     [Header("Keys")]
     [SerializeField] private KeyCode up;
     [SerializeField] private KeyCode left;
@@ -43,6 +45,8 @@ public class Movement : MonoBehaviour
 
     private WeaponAnchorRotator weaponAnchorRotator;
     private Vector3 faceDirection = Vector3.forward;
+
+    private float endLevelDistance;
 
     public Rigidbody2D Rigidbody2d { get; private set; }
     public SpringJoint2D SpringJoint2d { get; private set; }
@@ -160,6 +164,8 @@ public class Movement : MonoBehaviour
         InputDetect();
 
         FallingWithGravity();
+
+        CalculateEndLevelDistance();
     }
     #endregion
 
@@ -258,5 +264,10 @@ public class Movement : MonoBehaviour
         ForceSetState(new Stunned(this, 3f));
     }
 
+    private void CalculateEndLevelDistance()
+    {
+        endLevelDistance = Vector3.Distance(EndLevelTrigger.endLevelPosition, transform.position);
+        DistanceChanged?.Invoke(endLevelDistance);
+    }
     #endregion
 }
