@@ -2459,6 +2459,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7437050187255684782, guid: f0ab28c095734ae4a9894dced4a51e6a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bbbbe679d2660d840ab16aeb923e904d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0ab28c095734ae4a9894dced4a51e6a, type: 3}
 --- !u!1001 &1917095889033932019
@@ -2675,6 +2681,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2229501625884554110, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fb808878ddf027449554ddc126b3b3e,
+        type: 3}
+    - target: {fileID: 7599132849351680375, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 511a951410281a5478eefb1687665587,
+        type: 3}
     - target: {fileID: 7599132851155186597, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
         type: 3}
       propertyPath: m_LocalPosition.x
