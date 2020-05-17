@@ -23,6 +23,9 @@ public class Movement : MonoBehaviour
 
     private Vector2 inputDirection;
 
+    [Header("Visual")]
+    [SerializeField] private Transform playerVisual;
+
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 5f;
@@ -199,6 +202,7 @@ public class Movement : MonoBehaviour
             currentState?.OnLeftButton();
             thisFrameInputDirection += Vector2.left;
             faceDirection = Vector3.forward;
+            playerVisual.localScale = new Vector3(-playerVisual.localScale.y, playerVisual.localScale.y);
         }
         if (Input.GetKey(down))
         {
@@ -210,6 +214,7 @@ public class Movement : MonoBehaviour
             currentState?.OnRightButton();
             thisFrameInputDirection += Vector2.right;
             faceDirection = Vector3.back;
+            playerVisual.localScale = new Vector3(playerVisual.localScale.y, playerVisual.localScale.y);
         }
 
         inputDirection = thisFrameInputDirection.normalized;

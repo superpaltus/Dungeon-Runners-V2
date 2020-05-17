@@ -2454,21 +2454,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1202735186450226807, guid: f0ab28c095734ae4a9894dced4a51e6a,
-        type: 3}
-      propertyPath: staminaDrianSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1202735186450226807, guid: f0ab28c095734ae4a9894dced4a51e6a,
-        type: 3}
-      propertyPath: staminaForDash
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1202735186450226807, guid: f0ab28c095734ae4a9894dced4a51e6a,
-        type: 3}
-      propertyPath: staminaForJump
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1202735186450226811, guid: f0ab28c095734ae4a9894dced4a51e6a,
         type: 3}
       propertyPath: m_Name
