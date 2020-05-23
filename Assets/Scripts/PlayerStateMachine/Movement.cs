@@ -142,6 +142,13 @@ public class Movement : MonoBehaviour
             weaponAnchorRotator.SetRotation(faceDirection);
         }
     }
+
+    public void TakeDamage(Vector3 pushDirection, float pushForce, int damageInGold)
+    {
+        SetState(new Stunned(this));
+        Rigidbody2d.AddForce(pushDirection * pushForce);
+        GetComponent<PlyerGoldCollector>().SetDamage(damageInGold);
+    }
     #endregion
 
     #region MonoBehaviour

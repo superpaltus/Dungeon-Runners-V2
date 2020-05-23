@@ -5,6 +5,7 @@ using System.Collections;
 public class WeaponColliderAttack : MonoBehaviour
 {
     [SerializeField] private float attackPower = 500f;
+    [SerializeField] private int damage = 10;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,9 +13,8 @@ public class WeaponColliderAttack : MonoBehaviour
 
         if (playerMovement != null)
         {
-            playerMovement.SetState(new Stunned(playerMovement));
             var attackImpulseDirection = (playerMovement.transform.position - transform.parent.position).normalized;
-            playerMovement.Rigidbody2d.AddForce(attackImpulseDirection * attackPower);
+            playerMovement.TakeDamage(attackImpulseDirection, attackPower, damage);
             transform.parent.gameObject.SetActive(false);
         }
 
