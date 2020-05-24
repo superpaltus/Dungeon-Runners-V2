@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour
     public Stamina Stamina { get; private set; }
     public bool CanDash { get; set; } = true;
     public State CurrentState { get { return currentState; } }
+    public Vector3 InputDirection { get { return inputDirection; } }
 
     #region Public
     public void SetState(State state)

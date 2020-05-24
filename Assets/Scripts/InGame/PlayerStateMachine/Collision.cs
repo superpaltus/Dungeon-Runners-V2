@@ -55,11 +55,11 @@ public class Collision : MonoBehaviour
         {
             movement.SetState(new Idle(movement));
         }
-        if (onRightWall)
+        if (onRightWall && movement.Rigidbody2d.velocity.y <= 0)
         {
             movement.SetState(new RightWall(movement));
         }
-        if (onLeftWall)
+        if (onLeftWall && movement.Rigidbody2d.velocity.y <= 0)
         {
             movement.SetState(new LeftWall(movement));
         }

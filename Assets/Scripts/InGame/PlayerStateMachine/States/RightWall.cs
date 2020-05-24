@@ -55,10 +55,19 @@ public class RightWall : State
     }
     public override void OnAButton()
     {
-        Vector2 jumpDirection = new Vector2(-1f, 1f);
-        jumpDirection = jumpDirection.normalized;
-        movement.SetState(new Stunned(movement));
-        movement.WallJump(jumpDirection);
+        if (isHooked)
+        {
+            Vector2 jumpDirection = new Vector2(-1f, 1f);
+            jumpDirection = jumpDirection.normalized;
+            movement.SetState(new Stunned(movement));
+            movement.WallJump(jumpDirection);
+        }
+        else
+        {
+            Vector2 jumpDirection = new Vector2(0f, 1f);
+            movement.SetState(new Jump(movement));
+            movement.WallJump(jumpDirection);
+        }
     }
     public override void OnBButton()
     {
