@@ -18,6 +18,7 @@ public class Collision : MonoBehaviour
     public bool OnWall { get; private set; }
     public bool OnRightWall { get; private set; }
     public bool OnLeftWall { get; private set; }
+    public bool OnSomething { get; private set; }
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class Collision : MonoBehaviour
         OnRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
         OnLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
         OnWall = OnRightWall || OnLeftWall;
+        OnSomething = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius);
     }
 
     private void CalculateState()
@@ -60,6 +62,14 @@ public class Collision : MonoBehaviour
         if (onLeftWall)
         {
             movement.SetState(new LeftWall(movement));
+        }
+        if (OnSomething)
+        {
+            if (movement.CurrentState is Jump)
+            {
+                Debug.Log("Restore jump");
+                movement.CurrentState.OnStart();
+            }
         }
     }
 

@@ -56,6 +56,7 @@ public class Movement : MonoBehaviour
     public SpringJoint2D SpringJoint2d { get; private set; }
     public Stamina Stamina { get; private set; }
     public bool CanDash { get; set; } = true;
+    public State CurrentState { get { return currentState; } }
 
     #region Public
     public void SetState(State state)
