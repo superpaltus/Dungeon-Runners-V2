@@ -108,6 +108,8 @@ MonoBehaviour:
   x: 99
   y: 118
   playerVisual: {fileID: 1202735187867880614}
+  bloodPSPrefab: {fileID: 7052590511409704937, guid: e9a5f722584a54f16a2ce5a91b475b51,
+    type: 3}
   speed: 5
   jumpForce: 5
   fallMultiplier: 5
@@ -170,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldCoinPrefab: {fileID: 6213853426630941596, guid: 05c1aef73faea5946a2f85270d4b3c21,
     type: 3}
+  offset: 1
 --- !u!114 &381606034
 MonoBehaviour:
   m_ObjectHideFlags: 0

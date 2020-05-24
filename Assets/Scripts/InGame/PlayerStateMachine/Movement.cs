@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 
     [Header("Visual")]
     [SerializeField] private Transform playerVisual;
+    [SerializeField] private ParticleSystem bloodPSPrefab;
 
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
@@ -148,6 +149,7 @@ public class Movement : MonoBehaviour
         SetState(new Stunned(this));
         Rigidbody2d.AddForce(pushDirection * pushForce);
         GetComponent<PlyerGoldCollector>().SetDamage(damageInGold);
+        Instantiate(bloodPSPrefab, transform.position, Quaternion.identity);
     }
     #endregion
 
