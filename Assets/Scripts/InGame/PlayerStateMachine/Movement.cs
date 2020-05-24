@@ -143,9 +143,9 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void TakeDamage(Vector3 pushDirection, float pushForce, int damageInGold)
+    public void TakeDamage(Vector3 pushDirection, float pushForce, int damageInGold, float stunTime = 0.3f)
     {
-        SetState(new Stunned(this));
+        SetState(new Stunned(this, stunTime));
         Rigidbody2d.AddForce(pushDirection * pushForce);
         GetComponent<PlyerGoldCollector>().SetDamage(damageInGold);
     }

@@ -18,5 +18,11 @@ public class WeaponColliderAttack : MonoBehaviour
             transform.parent.gameObject.SetActive(false);
         }
 
+        var enemyHealth = collision.GetComponent<EnemyHealth>();
+
+        if (enemyHealth != null)
+        {
+            enemyHealth.SetDamage(damage);
+        }
     }
 }
