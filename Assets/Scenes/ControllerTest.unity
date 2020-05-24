@@ -937,18 +937,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8774545168379630860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &915414974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915414966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66015386ca448584e85bb6365fbc8a8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &920200789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,18 +2853,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2229501625884554110, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7fb808878ddf027449554ddc126b3b3e,
-        type: 3}
-    - target: {fileID: 7599132849351680375, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 511a951410281a5478eefb1687665587,
-        type: 3}
     - target: {fileID: 7599132851155186597, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2931,21 +2907,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599132851155186599, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
-        type: 3}
-      propertyPath: staminaDrianSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599132851155186599, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
-        type: 3}
-      propertyPath: staminaForDash
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599132851155186599, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
-        type: 3}
-      propertyPath: staminaForJump
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7599132851155186603, guid: a3a1c05db8bdcb64ca020e5d566d5eef,
         type: 3}
