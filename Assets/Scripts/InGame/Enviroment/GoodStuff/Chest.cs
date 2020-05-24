@@ -10,14 +10,21 @@ public class Chest : MonoBehaviour
     [SerializeField] private int coinsPerHit = 5;
     [SerializeField] private int lifes = 3;
 
+    private Animator hitAnimation;
+
     private bool isOpen;
+
+    private void Start()
+    {
+        hitAnimation =  GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<WeaponColliderAttack>() && !isOpen)
         {
             lifes--;
-
+            hitAnimation.SetTrigger("isHit");
             for (int i = 0; i < coinsPerHit; i++)
             {
                 var spawnPosition = transform.position + Vector3.up * spawnCoinsOffsetY;
