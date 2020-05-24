@@ -136,7 +136,7 @@ public class Movement : MonoBehaviour
     }
 
     public void Attack()
-    {
+    {   
         if (!weaponAnchorRotator.isActiveAndEnabled)
         {
             weaponAnchorRotator.gameObject.SetActive(true);
