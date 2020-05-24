@@ -123,7 +123,7 @@ public class Movement : MonoBehaviour
         if (!hookTile.isActiveAndEnabled)
         {
             hookTile.gameObject.SetActive(true);
-            hookTile.MoveDirection = inputDirection;
+            hookTile.MoveDirection = Vector3.up;
         }
     }
 
