@@ -5,6 +5,7 @@ public class Collision : MonoBehaviour
 {
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask objectLayer;
 
     [Header("Collision")]
     [SerializeField] private float collisionRadius = 0.25f;
@@ -37,7 +38,7 @@ public class Collision : MonoBehaviour
         OnRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
         OnLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, collisionRadius, groundLayer);
         OnWall = OnRightWall || OnLeftWall;
-        OnSomething = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius);
+        OnSomething = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, objectLayer);
     }
 
     private void CalculateState()
@@ -65,6 +66,7 @@ public class Collision : MonoBehaviour
         }
         if (OnSomething)
         {
+            Debug.Log("ON SOMETHING");
             if (movement.CurrentState is Jump)
             {
                 Debug.Log("Restore jump");
