@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform playerVisual;
     [SerializeField] private ParticleSystem bloodPSPrefab;
     [SerializeField] private Animator visualAnimator;
+    [SerializeField] private AudioClip hitAudioClip;
 
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
@@ -100,6 +101,7 @@ public class Movement : MonoBehaviour
     {
         if (Stamina.Spend(staminaForJump))
         {
+            Sounds.instance.PlayJump();
             Rigidbody2d.velocity = new Vector2(Rigidbody2d.velocity.x, jumpForce);
         }
     }
@@ -154,6 +156,7 @@ public class Movement : MonoBehaviour
         Rigidbody2d.AddForce(pushDirection * pushForce);
         GetComponent<PlyerGoldCollector>().SetDamage(damageInGold);
         Instantiate(bloodPSPrefab, transform.position, Quaternion.identity);
+        Sounds.instance.PlayHit();
     }
     #endregion
 

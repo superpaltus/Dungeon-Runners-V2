@@ -23,6 +23,7 @@ public class EndLevelWinMenu : MonoBehaviour
 
     private IEnumerator ShowMenuCorutine()
     {
+        Sounds.instance.PlayWin();
         winMenu.SetActive(true);
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(7f);

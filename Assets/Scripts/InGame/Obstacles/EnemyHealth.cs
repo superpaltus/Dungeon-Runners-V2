@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     
     public void SetDamage(int damage)
     {
+        Sounds.instance.PlayHit();
         health = Mathf.Max(health - damage, 0);
         if (health == 0) Destroy(gameObject);
     }

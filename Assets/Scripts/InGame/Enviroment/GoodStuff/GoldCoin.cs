@@ -24,6 +24,7 @@ public class GoldCoin : MonoBehaviour
         
         if (playerGoldCollector != null)
         {
+            Sounds.instance.PlayCoin();
             playerGoldCollector.ChangeGold(goldValue);
             Destroy(gameObject);
         }
@@ -35,6 +36,7 @@ public class GoldCoin : MonoBehaviour
 
         if (playerGoldCollector != null)
         {
+            Sounds.instance.PlayCoin();
             playerGoldCollector.ChangeGold(goldValue);
             Destroy(gameObject);
         }

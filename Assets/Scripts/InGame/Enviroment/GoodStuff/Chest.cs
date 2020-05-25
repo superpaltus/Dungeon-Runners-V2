@@ -23,6 +23,7 @@ public class Chest : MonoBehaviour
     {
         if (collision.GetComponent<WeaponColliderAttack>() && !isOpen)
         {
+            Sounds.instance.PlayHit();
             lifes--;
             hitAnimation.SetTrigger("isHit");
             for (int i = 0; i < coinsPerHit; i++)
