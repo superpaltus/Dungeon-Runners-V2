@@ -55,7 +55,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 2047f7ea7c5944c45875232d578eb37a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -110,9 +110,10 @@ MonoBehaviour:
   playerVisual: {fileID: 1202735187867880614}
   bloodPSPrefab: {fileID: 7052590511409704937, guid: e9a5f722584a54f16a2ce5a91b475b51,
     type: 3}
-  speed: 5
-  jumpForce: 5
-  fallMultiplier: 5
+  visualAnimator: {fileID: 955880057}
+  speed: 6.5
+  jumpForce: 12
+  fallMultiplier: 4
   lowJumpMultiplier: 5
   stunTime: 0.2
   dashTime: 0.1
@@ -160,7 +161,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0.1
-  m_Frequency: 1
+  m_Frequency: 1.3
 --- !u!114 &-4025903234444856608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202735187867880614}
   - component: {fileID: 1202735187867880615}
+  - component: {fileID: 955880057}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -381,7 +383,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 3b1b3414ae348624f84bfdb968e922a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07ee215f03d48fe46adc0634d816ca73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -392,6 +394,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &955880057
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202735187867880613}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b57f845bb3fdd0a4aaa43e66b404cf4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6080954339319299723
 GameObject:
   m_ObjectHideFlags: 0

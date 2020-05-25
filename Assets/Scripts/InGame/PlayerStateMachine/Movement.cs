@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
     [Header("Visual")]
     [SerializeField] private Transform playerVisual;
     [SerializeField] private ParticleSystem bloodPSPrefab;
+    [SerializeField] private Animator visualAnimator;
 
     [Header("Sensetive")]
     [SerializeField] private float speed = 5f;
@@ -86,6 +87,7 @@ public class Movement : MonoBehaviour
     public void XAxisMove(float magnitude)
     {
         Rigidbody2d.velocity = new Vector2(speed * magnitude, Rigidbody2d.velocity.y);
+        visualAnimator.SetTrigger("run");
     }
 
     public void YAxisMove(float magnitude)
