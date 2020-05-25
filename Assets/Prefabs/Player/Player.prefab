@@ -561,4 +561,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 500
-  damage: 10
+  damage: 3
