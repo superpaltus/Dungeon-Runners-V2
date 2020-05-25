@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class DistanceParameter : UIParameterValue<float>
 {
-    [SerializeField] private Text textDistanceValue;
+    [SerializeField] private Slider sliderDistanceValue;
+
+    private bool isSet = false;
+
+    private float startValue = 0f;
 
     public override void OnStart(GameObject player)
     {
@@ -14,6 +18,11 @@ public class DistanceParameter : UIParameterValue<float>
 
     public override void ChangeValue(float value)
     {
-        textDistanceValue.text = value.ToString("0.0");
+        if (!isSet)
+        {
+            startValue = value;
+            isSet = true;
+        }
+        sliderDistanceValue.value = value / startValue;
     }
 }
