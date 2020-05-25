@@ -7,6 +7,8 @@ public class EndLevelTrigger : MonoBehaviour
 
     public static Vector3 endLevelPosition;
 
+    private bool isActivate = false;
+
     private void Start()
     {
         endLevelPosition = transform.position;
@@ -14,9 +16,10 @@ public class EndLevelTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (other.GetComponent<Movement>())
+        if (!isActivate && other.GetComponent<Movement>())
         {
             Debug.Log("You reached end of a level!");
+            isActivate = true;
             EndLevelReached?.Invoke();
         }
     }

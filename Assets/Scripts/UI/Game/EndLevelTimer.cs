@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,19 +28,21 @@ public class EndLevelTimer : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             int currentTimeInt = (int)currentTime;
-            timerText.text = $"{(currentTimeInt / 60).ToString("00")}:{(currentTimeInt % 60).ToString("00")}";
+            timerText.text = $"{currentTimeInt}";
 
             if (currentTime <= 0)
             {
                 Debug.Log("End timer complite. Level ends."); // TODO: connect end level elements
                 isActive = false;
                 Complite?.Invoke();
+                timerText.gameObject.SetActive(false);
             }
         }
     }
 
     public void Activate()
     {
+        timerText.gameObject.SetActive(true);
         currentTime = timeToSet;
         isActive = true;
     }
