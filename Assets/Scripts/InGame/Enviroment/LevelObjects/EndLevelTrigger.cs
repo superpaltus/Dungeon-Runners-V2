@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class EndLevelTrigger : MonoBehaviour
 {
+    public static Action EndLevelReached;
+
     public static Vector3 endLevelPosition;
 
     private void Start()
@@ -16,6 +17,7 @@ public class EndLevelTrigger : MonoBehaviour
         if (other.GetComponent<Movement>())
         {
             Debug.Log("You reached end of a level!");
+            EndLevelReached?.Invoke();
         }
     }
 }
