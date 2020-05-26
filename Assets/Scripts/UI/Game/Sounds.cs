@@ -29,6 +29,7 @@ public class Sounds : MonoBehaviour
 
     public void PlayWin()
     {
+        audioSource.Stop();
         audioSource.PlayOneShot(win);
     }
 
